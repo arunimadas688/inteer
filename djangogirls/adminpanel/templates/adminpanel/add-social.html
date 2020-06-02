@@ -1,0 +1,123 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+  <div class="col-md-12">
+     <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add Social</h3>
+              <div class="alert alert-success response" style="display: none;">
+                <strong>Social Added Successfully</strong>
+              </div>
+              <div class="alert alert-success response-slug" style="display: none;">
+                <strong>slug already exists</strong>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {% if errormsg %}
+				<div class="alert alert-danger">
+					<strong>{{ errormsg }}</strong>
+				</div>
+              {% endif %}  
+              <form role="form" id="frm_addservice" method="post" action="/admin/add-social/" enctype="multipart/form-data">{% csrf_token %}
+                <!-- text input -->
+               
+                <div class="form-group">
+                  <label>Social Title</label>
+                  <input name="title" type="text" placeholder="Social Title" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Social URL</label>
+                  <input name="urls" type="text" placeholder="Social URL" class="form-control" required>
+                </div>
+                
+              
+                
+                <div class="form-group">
+                   <label>Social Logo</label>
+                   <input type="file" name="cover_pic" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-lg" type="submit">Add Social</button>
+                </div> 
+                
+            </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+      
+   </div>
+
+{% include "adminpanel/footer-profile.html" %}
+<script>
+   //callback handler for form submit
+$("#frm_addservice").submit(function(e)
+{
+    var formURL = $(this).attr("action");
+    $.ajax(
+    {
+        url : formURL,
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        beforeSend: function() {
+                    //$('.response').show();
+                },
+        success:function(data, textStatus, jqXHR) 
+        {
+            if(data === '1') {
+              $('.response-slug').hide();
+              $('.response').show();
+              $('html,body').animate({
+                scrollTop: $(".response").offset().top},
+                'slow');
+              setTimeout(function(){ location.assign("/admin/list-social/"); }, 3000);
+            }else {
+              $('.response-slug').show();
+              $('.response').hide(); 
+              $('html,body').animate({
+                scrollTop: $(".response-slug").offset().top},
+                'slow');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            return false;      
+        }
+    });
+    e.preventDefault(); //STOP default action
+    //e.unbind(); //unbind. to stop multiple form submit.
+});
+    
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyB2YO7UWCZmmtCBpF2mPDEJ-T08rxmyOOI" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('city2').value = place.name;
+            document.getElementById('cityLat').value = place.geometry.location.lat();
+            document.getElementById('cityLng').value = place.geometry.location.lng();
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize); 
+</script>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+  height: 300,                 // set editor height
+  minHeight: 300,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true                  // set focus to editable area after initializing summernote
+});
+});
+</script>

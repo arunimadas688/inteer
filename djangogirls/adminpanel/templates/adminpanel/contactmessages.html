@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}  
+<div class="col-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Contact Us Messages</h3>
+              {% if messages %}
+                <ul class="messages list-unstyled" style="margin-top: 40px;">
+                    {% for message in messages %}
+                    <li>
+                        <div class="alert alert-success" role="alert">
+                        {{ message }}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %} 
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="usertable"
+               data-toggle="table"
+               data-url="/admin/all-contactmessages/"
+               data-height="900"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-field="message_id" data-sortable="true" >Message ID</th>
+                <th data-field="subject">Subject</th>
+                <th data-field="message_from" data-sortable="true">Message From</th>
+                <th data-field="entry_date">Date</th>
+                <th data-field="is_replied" data-formatter="replyFormatter">Reply</th>
+                <th data-field="actionid" data-formatter="actionFormatter">Actions</th>
+            </tr>
+            </thead>
+        </table>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+{% include "adminpanel/footer-profile.html" %}
+<script>
+function replyFormatter(value, row) {
+      if (value === 1)
+           return "Yes";
+      else
+        return "No";
+    }
+function actionFormatter(value, row) {
+     var html;
+     html = '<a class="btn btn-primary" href="/admin/reply-message/'+value+'">Reply</a>';
+     html = html + " | "
+     html = html+'<a class="btn btn-primary" href="/admin/view-contactmessage/'+value+'">View</a>';
+     return html;
+    }    
+</script>

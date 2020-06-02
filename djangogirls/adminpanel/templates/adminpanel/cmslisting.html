@@ -1,0 +1,51 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}  
+<div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">CMS</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <table id="myTable" class="display" cellspacing="0" width="100%">
+              <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>CMS Title</th>
+                  <th>CMS Text</th>
+                  <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for cms in cms %}
+                <tr>
+                  <td>{{cms.id}}</td>
+                  <td>{{cms.title}}</td>
+                  <td>{{cms.text}}</td>
+                  <td>{{cms.short_description | safe}}</td>
+                  <td><a href="/admin/edit-cms/{{cms.id}}" class="btn btn-primary">Edit</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+{% include "adminpanel/footer-profile.html" %}
+
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+    
+$(document).ready(function() {
+	$(".fancybox-button").fancybox({
+		openEffect	: 'elastic',
+      closeEffect	: 'elastic',
+	});
+});
+</script>

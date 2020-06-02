@@ -1,0 +1,20 @@
+<html>
+    <div class="container">
+        <div class="row">
+            <p><a href="{% url 'stripehome' %}">All Products </a> &gt;
+                {{ product.name }}
+            </p>
+
+                <h2>{{ product.name }}</h2>
+                <p>Price ${{ product.price }}</p>
+
+                <form action="{% url 'product_detail' product.id product.slug %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="1" required id="id_quantity">
+                    <input type="hidden" name="product_id" value="{{product.id}}" id="id_product_id">
+                    <input type="submit" value="Add to cart" class="btn btn-primary" >
+                </form>
+
+        </div>
+    </div>
+</html>

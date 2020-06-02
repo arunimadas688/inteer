@@ -1,0 +1,234 @@
+{% load staticfiles %}
+{% include "frontend/inner-header.html" %}
+{% load template_functions %}
+<!--     <section class="login-page">
+        <div class="container">
+        {% for st in req_status %}
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-12 text-center">
+                    <div class="logo-pic">
+                        <img src='{% static "common" %}/fontend/img/logo-color.png' alt="" class="img-fluid">
+                    </div>
+                    
+                        <p class="text-left font-weight-medium">Become a Coordinator</p>
+                        <form class="form-area" action="/become-coordinator/" method="POST">
+                            <div class="form-group">
+                                <select name="org_id_id" id="org_id_id" class="form-control">
+                                    <option value="">- Select -</option>
+                                    {% for org in organization %}
+                                    
+                                       {% if org.id == st.org_id_id %} 
+                                        <option value="{{st.org_id_id}}" selected>{{org.organization_name}}</option>
+                                        {% else %}
+                                        <option value="{{st.org_id_id}}">{{org.organization_name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section> -->
+
+    <section class="py-5 bg-light pr-sectiondiv">
+      <div class="container-fluid">
+          {% for usr in user %}
+          <div class="row">
+            <div class="col-lg-2">
+              <div class="pr-img-div mb-4">
+                <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt=""
+                class="img-fluid text-center img-thumbnail">
+            </div>
+        </div>
+        <div class="col-lg-10">
+          <div class="pr-txt-div">
+            <form action="/editprofile/" method="POST" name="edit_profile_form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-2">
+                      <h5 class="h6 text-grey text-uppercase">First Name</h5>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="first_name" value="{{usr.first_name}}" placeholder="name...." />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-2">
+                      <h5 class="h6 text-grey text-uppercase">Last Name</h5>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="last_name" value="{{usr.last_name}}" placeholder="name...." />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <h5 class="h6 text-grey text-uppercase">Email</h5>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <input type="email" class="form-control" value="{{usr.email}}" name="email" placeholder="Your mail...." />
+                    </div>
+                </div>
+            </div>
+
+        {% for usrpfl in userprofile %}
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="h6 text-grey text-uppercase">Phone</h5>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <input type="tel" class="form-control" value="{{usrpfl.phone_number}}" name="phone_number" placeholder="Your Contacts...." />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="h6 text-grey text-uppercase">Address</h5>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <input type="tel" class="form-control" value="{{usrpfl.address}}" name="address" placeholder="Your Contacts...." />
+                    </div>
+                </div>
+            </div>
+
+             <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="h6 text-grey text-uppercase">Physical Ability</h5>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <input type="tel" class="form-control" value="{{usrpfl.physical_ability}}" name="physical_ability" placeholder="Your Contacts...." />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="h6 text-grey text-uppercase">About Me</h5>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="tel" class="form-control" value="{{usrpfl.about_me}}" name="about_me" placeholder="Your Contacts...." />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <h5 class="h6 text-grey text-uppercase">Interest On</h5>
+                    </div>
+                    <div class="col-lg-10">
+                        <select class="form-control" name="interest_id">
+                            <option value="">- Select -</option>
+                            {% for int in interest %}
+                                {% if int.id == usrpfl.interest_id_id %}
+                                    <option value="{{int.id}}" selected>{{int.interest_name}}</option>
+                                {% else %}
+                                    <option value="{{int.id}}">{{int.interest_name}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+{% endfor %}
+
+<!-- <div class="pr-txt-div">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="bg-white p-3 pr-5">
+        <h6 class="text-grey text-capitalize pb-3 d-inline-block">volunteer of</h6>
+        <a action="#" class="d-inline-block float-right">
+           <span class="btn btn-link pr-3 btn-sm">Add</span>
+           <span class="btn btn-link p-0 btn-sm">Manage </span>
+       </a>                      
+       <div class="media mb-3">
+          <img class="mr-3" src="img/cc.png" alt="">
+          <div class="media-body">
+            <h6 class="mt-0 d-inline-block">Autonomus Driving Club</h6>
+            <small class="text-grey d-block">2325 Oakwood Dr.Mi</small>
+        </div>
+    </div> 
+
+    <div class="media mb-3">
+      <img class="mr-3" src="img/int.png" alt="">
+      <div class="media-body">
+        <h6 class="mt-0 d-inline-block">Inter LLC</h6>
+        <small class="text-grey d-block">886 Oakwood Dr.Mi</small>
+    </div>
+</div> 
+
+<div class="media mb-3">
+  <img class="mr-3" src="img/cc.png" alt="">
+  <div class="media-body">
+    <h6 class="mt-0 d-inline-block">United Nation Student Club </h6>
+    <small class="text-grey d-block">886 Oakwood Dr.Mi</small>
+</div>
+</div> 
+</div>
+</div>
+
+<div class="col-lg-6">
+  <div class="bg-white p-3 pr-5">
+    <h6 class="text-grey text-capitalize pb-3 d-inline-block">Coordinator of</h6>
+    <a action="#" class="d-inline-block float-right">
+       <span class="btn btn-link pr-3 btn-sm">Add</span>
+       <span class="btn btn-link p-0 btn-sm">Manage </span>
+   </a>                      
+   <div class="media mb-3">
+      <img class="mr-3" src="img/int.png" alt="">
+      <div class="media-body">
+        <h6 class="mt-0 d-inline-block">United Nation Student Club</h6>
+        <small class="text-grey d-block">2325 Oakwood Dr.Mi</small>
+    </div>
+</div> 
+
+<div class="media mb-3">
+  <img class="mr-3" src="img/cc.png" alt="">
+  <div class="media-body">
+    <h6 class="mt-0 d-inline-block">Inter LLC</h6>
+    <small class="text-grey d-block">886 Oakwood Dr.Mi</small>
+</div>
+</div> 
+
+<div class="media mb-3">
+  <img class="mr-3" src="img/cc.png" alt="">
+  <div class="media-body">
+    <h6 class="mt-0 d-inline-block">Autonomus Driving Club</h6>
+    <small class="text-grey d-block">886 Oakwood Dr.Mi</small>
+</div>
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="clearfix"></div> -->
+{% include "frontend/inner-footer.html" %}

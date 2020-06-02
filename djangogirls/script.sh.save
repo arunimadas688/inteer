@@ -1,0 +1,1 @@
+#!/python /var/www/html/inteer/djangogirls/ manage.py runserver 0:8007

@@ -1,0 +1,247 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+ <div class="col-md-12">
+     <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Organization Details</h3>
+              <div class="alert alert-success response" style="display: none;">
+                <strong>Organization Edited Successfully</strong>
+              </div>
+              <div class="alert alert-success response-slug" style="display: none;">
+                <strong>Cannot update Organization</strong>
+              </div>
+              <div class="alert alert-success nsdel_msg" style="display: none;">
+                <strong>Organization Deleted successfully! </strong>
+              </div>
+            </div>
+         
+            <!-- /.box-header -->
+            <div class="box-body">
+                
+              <form role="form" id="frm_editservice" method="post" action="/admin/edit-organization/" enctype="multipart/form-data">{% csrf_token %}
+                  <input type="hidden" name="service_id" value="{{ services.id }}">
+                
+                  
+                  <div class="form-group">
+                  <label>Organization Title</label>
+                  <input name="organization_name" value="{{ services.organization_name }}" type="text" placeholder="Organization Name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Organization Email</label>
+                  <input name="email" type="email" value="{{ services.email }}" placeholder="Organization Email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Organization Phone</label>
+                  <input name="phone" type="text" value="{{ services.phone }}" placeholder="Organization Phone" class="form-control" required>
+                </div>
+                
+                
+                <div class="form-group">
+                  <label>Organization URL</label>
+                  <input name="web_url" type="url" value="{{ services.web_url }}" placeholder="Organization URL" class="form-control" required>
+                </div>
+                
+                 <div class="form-group">
+                  <label>Organization TaxId</label>
+                  <input name="tax_id" type="text" value="{{ services.tax_id }}" placeholder="Organization TaxId" class="form-control" required>
+                </div>
+                
+                
+                <div class="form-group">
+                   <label>Cause</label>
+                  <textarea name="cause" placeholder="Cause" class="form-control summernote" maxlength="300" required>{{ services.cause }}</textarea>
+                </div>
+                
+                
+                <div class="form-group">
+                   <label>About Us</label>
+                   <textarea style="margin: 0px -1px 0px 0px; height: 131px; width: 1006px;" name="about_us" placeholder="About Us" class="form-control summernote" required>{{ services.about_us }}</textarea>
+                </div>
+                
+                
+                <div class="form-group">
+                   <label>Our Activity</label>
+                  <textarea name="our_activity" placeholder="Our Activity" class="form-control summernote" maxlength="300" required>{{ services.our_activity }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                   <label>Why Us</label>
+                  <textarea name="why_us" placeholder="Why Us" class="form-control summernote" maxlength="300" required>{{ services.why_us }}</textarea>
+                </div>
+                
+                
+                <div>
+                </div>
+                
+                
+                
+                
+                <div class="form-group">
+                    <label>Organization address</label>
+                    <input id="searchTextField" value="{{ services.address }}" class="form-control" type="text" size="50" placeholder="Enter a location" autocomplete="on" required />  
+                    <input type="hidden" id="city2" name="city2" />
+                    <input type="hidden" id="cityLat" name="cityLat" />
+                    <input type="hidden" id="cityLng" name="cityLng" /> 
+                </div>
+                <div class="form-group">
+                   <label>Photo</label>
+                   <input type="file" name="photo" accept="image/*">
+                </div>
+                  
+                  
+                 <div class="form-group">
+                    <button class="btn btn-success btn-lg" type="submit">Edit Organization</button>
+                    <button id="delete_service" class="btn btn-success btn-lg" type="submit">Delete Organization</button>
+                </div> 
+                
+            </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+      
+   </div>
+
+{% include "adminpanel/footer-profile.html" %}
+<script>
+   //callback handler for form submit
+$("#frm_editservice").submit(function(e)
+{
+    var formURL = $(this).attr("action");
+    $.ajax(
+    {
+        url : formURL,
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        beforeSend: function() {
+            $("#default_loader").show();
+        },
+        success:function(data, textStatus, jqXHR) 
+        {
+            if(data !== '0') {
+              $("#default_loader").hide();
+              show_toast("Edited Success fully!");
+              setTimeout(function(){ location.assign("/admin/organization-details/"+data+"/"); }, 3000);
+            }else {
+              $("#default_loader").hide();
+              show_toast("Slug Already Exists!");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            return false;      
+        }
+    });
+    e.preventDefault(); //STOP default action
+    //e.unbind(); //unbind. to stop multiple form submit.
+});
+
+/* delete product  */
+
+$("#delete_service").click(function(e)
+{
+    var x = confirm("Are you sure you want to delete?");
+    if (x) {
+    var del_id = '{{ services.id }}';
+    $.ajax(
+    {
+        url : "/admin/delete-organization/",
+        type: "POST",
+        data:  {'del_id' : del_id },
+        beforeSend: function() {
+                    //$('.response').show();
+                },
+        headers: {'X-CSRFToken': '{{ csrf_token }}'},        
+        success:function(data, textStatus, jqXHR) 
+        {
+            if(data !== '0') {
+              $("#default_loader").hide();
+              show_toast("Deleted Success fully!");
+              setTimeout(function(){ location.assign("/admin/list-organization/"); }, 3000);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            return false;      
+        }
+    });
+} else { 
+         return false;
+      }  
+    e.preventDefault(); //STOP default action
+    //e.unbind(); //unbind. to stop multiple form submit.
+});
+
+
+    
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyB2YO7UWCZmmtCBpF2mPDEJ-T08rxmyOOI" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('city2').value = place.name;
+            document.getElementById('cityLat').value = place.geometry.location.lat();
+            document.getElementById('cityLng').value = place.geometry.location.lng();
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize); 
+</script>
+<script>
+$(document).ready(function() {
+  $('.summernote').summernote({
+  height: 300,                 // set editor height
+  minHeight: 300,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true                  // set focus to editable area after initializing summernote
+});
+});
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+      <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#start_date" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#end_date" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  </script>

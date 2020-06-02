@@ -1,0 +1,64 @@
+{% load staticfiles %}
+{% include "adminpanel/header.html" %}
+<body class="hold-transition login-page">
+  {% if messages %}
+    <ul class="messages list-unstyled" style="margin-top: 40px;">
+        {% for message in messages %}
+            <li>
+                <div class="alert alert-error" role="alert">
+                    {{ message }}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+  {% endif %} 
+  <div class="login-box">
+    <div class="login-logo">
+      <a href=""><b>Admin</b>Login</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+      {% if msg_error %}
+        <div class="alert alert-danger">
+          <strong>{{ msg_error }}</strong>
+        </div>
+      {% endif %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <form action="/admin/login/" method="post">
+        {% csrf_token %}
+        <div class="form-group has-feedback">
+          <input name="username" type="text" class="form-control" placeholder="Username" required="">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input name="password" type="password" class="form-control" placeholder="Password" required="">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+          <div class="col-xs-8">
+         <!-- <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div> -->
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    <a href="/admin/forgotpassword/">I forgot my password</a><br>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+{% include "adminpanel/footer.html" %}

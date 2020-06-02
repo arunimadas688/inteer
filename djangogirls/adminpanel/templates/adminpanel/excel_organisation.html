@@ -1,0 +1,93 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-12">
+    {% if messages %}
+        <ul class="messages list-unstyled" style="margin-top: 40px;">
+            {% for message in messages %}
+                <li>
+                    <div class="alert alert-{{msg}}" role="alert">
+                        {{ message }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+    <div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Admin Management</h3>
+        <!-- <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div> -->
+        <form action="/admin/upload_organization_opportunity/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group has-feedback">
+                <input type="file" name="csv_file" id="csv_file" required>
+                <!-- <input type="submit" value="Upload Excel" name="submit"> -->
+            </div>
+            <div class="row">
+             
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat" value="Upload Excel">Import</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+    </div>
+    <!-- /.box-header -->
+    <div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Cause</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+    </table>
+    No record!
+                
+    </div>
+    <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>
+    <!-- /.col -->
+  
+{% include "adminpanel/footer-profile.html" %}
+<script>
+function anchorFormatter(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/organization-details/'+value+'/">Actions</a>';
+    }
+function servicegallery(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/service-gallery/'+value+'/">Gallery</a>';
+    }
+function confirmationmsg(obj){
+    console.log(window.location)
+    if(confirm('Are you sure?')){
+        window.location.href = window.location.origin + $(obj).attr('data-url') ;
+    }
+}
+$(document).ready(function() {
+   
+    if($('#example').length>0){
+        $('#example').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            // "aoColumnDefs": [
+            //     { 'bSortable': false, 'aTargets': [4] }
+            // ],
+            'responsive': true,
+            "order": [[ 0, "desc" ]],     
+            "ajax": {
+                url: '/admin/json_upload_organization', // json datasource
+                data: {action: 'json_upload_organization'},
+                // data: {action: '{{admin_management}}'},
+                // type: 'post',  // method  , by default get
+            },
+        });
+    }
+    });
+</script>

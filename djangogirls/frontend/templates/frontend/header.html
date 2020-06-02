@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   {% load staticfiles %}
+    {% load template_functions %}
+    <title>Inteer</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='{% static "common/fontend/css/bootstrap.min.css" %}' >
+    <!--  icon  css   -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/b245db073c.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <!--   custom   css    -->
+    <link rel="stylesheet" href='{% static "common/fontend/css/style.css" %}'>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!--   navigation   -->
+      <nav class="navbar navbar-expand-lg navbar-light navBg" >
+      {% get_logo as logo %}
+              <a class="navbar-brand w-130" href="/"><img src='{{ logo.logo_image.url }}' class="img-fluid" alt="logo"></a>
+              <button class="navbar-toggler navbar-toggler-right mt-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto align-items-center">
+                  <li id="wrap" class="nav-search">
+                                <form action="" autocomplete="on">
+                                    <input id="search" name="search" type="text" placeholder="What're we looking for ?">
+                                    <!--<span class="fa fa-search"></span>-->
+                                    <div class="seaech-submit">
+                                    <input id="search_submit" value="Search" type="submit">
+                                        </div>
+                      </form>
+                            </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-th-list"></i>Feed</a>
+                  </li>
+                    <li class="nav-item">
+                    <a class="nav-link inteer-link" href="#"><img src='{% static "common" %}/fontend/img/logo-sign.png'> My Inteer</a>
+                  </li>
+                    <li class="nav-item contact-link">
+                    <a class="nav-link inteer-link" href="#"><i class="fa fa-phone"></i>Contact Us</a>
+                  </li>
+                  {% if 'member_id' in request.session %}
+                    <li class="nav-item">
+                    <a class="nav-link inteer-link loginLink" href="/logout"><img src='{% static "common" %}/fontend/img/loginIcon.png'> Logout</a>
+                  </li>
+                  {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link inteer-link loginLink" href="/login"><img src='{% static "common" %}/fontend/img/loginIcon.png'> Login</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </div>
+      </nav>

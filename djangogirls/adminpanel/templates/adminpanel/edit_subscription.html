@@ -1,0 +1,99 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+        <h3 class="box-title">Edit Sub Admin</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        {% if messages %}
+            <ul class="messages list-unstyled" style="margin-top: 40px;">
+                {% for message in messages %}
+                    <li>
+                        <div class="alert alert-error" role="alert">
+                            {{ message }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %} 
+        <form role="form" method="post" action="{% url 'edit_subscription' paymentObj.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="subscription-email">Email</label>
+                    <input type="text" name="firstname" placeholder="Email" id="subscription-email" class="form-control" value="{{paymentObj.email}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="subscription-startdate">Start Date</label>
+                    <input type="text" name="startdate" placeholder="Last Name" id="subscription-startdate" class="form-control" value="{{subscription_start_date}}" data-startdate={{subscription_start_date}} required autocomplete="off">
+                </div> 
+                {% comment %}
+                <div class="form-group">
+                    <label for="subscription-enddate">End Date</label>
+                    <input type="text" name="enddate" placeholder="Last Name" id="subscription-enddate" class="form-control" value="{{subscription_end_date}}" data-enddate={{subscription_end_date}} required autocomplete="off">
+                </div> 
+                {% endcomment %}
+                <div class="form-group">
+                    <label for="subscription-admin-change-date">Admin Change Subcription Date</label>
+                    {% if paymentObj.admin_chane_subcription_date == True %}
+                        <input type="checkbox"  id="admin-chane-subcription_date"   data-adminchanesubcriptiondate={{paymentObj.admin_chane_subcription_date}} checked disabled>
+                    {% else %}
+                        <input type="checkbox"  id="admin-chane-subcription_date"   data-adminchanesubcriptiondate={{paymentObj.admin_chane_subcription_date}} disabled>
+                    {% endif %}
+                    </div>   
+                <br/>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Update Subscription</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% include "adminpanel/footer-profile.html" %}
+<script>
+$(document).ready(function() {
+    var st_date =  $('#subscription-startdate');
+    var end_date =  $('#subscription-enddate');
+    var chk = st_date.attr('data-startdate');
+    var cur_date = new Date();
+    var cur_year = cur_date.getFullYear();
+    console.log(chk);
+    // var dates = new Date(st_date);
+    // console.log(dates);
+    // st_date.datepicker();setDate
+    st_date.focus(function(){
+        dateSelecting(st_date);
+       
+    });
+    end_date.focus(function(){
+        dateSelecting(end_date);
+    });
+    function dateSelecting(setDate){
+        setDate.datepicker({
+            dateFormat: "mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: getRange(),
+            onClose: function(dateText, inst) { 
+                function isDonePressed() {
+                    return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                }
+                if (isDonePressed()){
+                    alert('done pressed');
+                    $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+                }
+            }
+        });
+    }
+    function getRange(){
+        var prev_yr =  cur_date.getFullYear() - 100 ;
+        var yr_range = prev_yr+':'+cur_year;
+        return yr_range;
+    }
+   
+});
+</script>

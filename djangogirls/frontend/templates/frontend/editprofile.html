@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% include "frontend/inner-header.html" %}
+{% load template_functions %}
+    <section class="login-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-12 text-center">
+                    <div class="logo-pic">
+                        <img src='{% static "common" %}/fontend/img/logo-color.png' alt="" class="img-fluid">
+                    </div>
+                    <p class="text-left font-weight-medium">Edit Profile</p>
+                    <form class="form-area">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name">
+                        </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name">
+                        </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="locaion" id="Location" placeholder="Location">
+                        </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="phonenumber" id="phonenumber" placeholder="Phone Number">
+                        </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="emailaddress" id="emailaddress" placeholder="Email Address">
+                        </div> 
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="intereston" id="intereston" placeholder="Interest On">
+                        </div> 
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="physicalability" id="physicalability" placeholder="Physical Ability">
+                        </div> 
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="aboutus" id="aboutus" placeholder="About Us">
+                        </div> 
+                          <div class="form-group">
+                            <input type="File" class="form-control" name="uploadimage" id="uploadimage" placeholder="uploadimage">
+                        </div> 
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Signup</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include "frontend/inner-footer.html" %}

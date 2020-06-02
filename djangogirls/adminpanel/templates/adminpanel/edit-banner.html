@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+    <h3 class="box-title">Edit Banner</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="post" action="/admin/submit-editbanner/" enctype="multipart/form-data">
+      {% csrf_token %}
+        <input type="hidden" name="banner_id" id="bannerID" value="{{ banner.id }}">
+        <input type="hidden" name="banner_image" id="bannerID" value="{{ banner.banner_image }}">
+        <input type="hidden" name="banner_logo" id="bannerID" value="{{ banner.banner_logo }}">
+        
+      <div class="box-body">
+       
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Banner Section</label>
+          <input type="text" name="banner_section" placeholder="Enter section" value="{{ banner.banner_section }}" id="exampleInputTitle" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Title</label>
+          <input type="text" name="banner_title" placeholder="Enter Title" value="{{ banner.banner_title }}" id="exampleInputTitle" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Text</label>
+          <input type="text" name="banner_text" placeholder="Enter Text" id="exampleInputTitle" value="{{ banner.banner_text }}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <a class="fancyboxshow" href="/media/{{ banner.banner_image }}" height="200" width="380">  
+                <img src='/media/{{ banner.banner_image }}'>  
+            </a>
+        </div>
+        <div class="form-group">
+        <label for="exampleInputTitle">Upload Banner Image</label>
+          <input name="banner_image" type="file" accept="image/*" id="exampleInputFile">
+        </div>
+
+        <div class="form-group">
+            <a class="fancyboxshow" href="/media/{{ banner.banner_logo }}">  
+                <img src='/media/{{ banner.banner_logo }}'>  
+            </a>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputTitle">Upload Banner Logo</label>
+          <input name="banner_logo" type="file" accept="image/*" id="exampleInputFile">
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="col-md-3">
+        <button class="btn btn-primary btn-block btn-sm" type="submit">Edit Banner</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% include "adminpanel/footer-profile.html" %}
+<script>
+$(document).ready(function() {
+	$(".fancyboxshow").fancybox({
+		openEffect	: 'elastic',
+      closeEffect	: 'elastic',
+	});
+});
+</script>

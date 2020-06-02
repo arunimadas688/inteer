@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}  
+<div class="col-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Social</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="usertable"
+               data-toggle="table"
+               data-url="/admin/get_socials/"
+               data-height="900"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-field="sid">Social ID</th>
+                <!--<th data-field="thumbnail" data-formatter="imageFormatter">Pic</th>-->
+                <th data-field="title" data-sortable="true">Social Title</th>
+                <th data-field="urls" data-sortable="true">Social URL</th>
+                <th data-field="id" data-formatter="anchorFormatter">Actions</th>
+            </tr>
+            </thead>
+        </table>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+     
+{% include "adminpanel/footer-profile.html" %}
+<script>
+function anchorFormatter(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/socials_details/'+value+'/">Actions</a>';
+    }
+function servicegallery(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/service-gallery/'+value+'/">Gallery</a>';
+    }    
+</script>

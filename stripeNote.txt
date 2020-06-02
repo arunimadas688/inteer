@@ -1,0 +1,1 @@
+1. A subscription may cancel automatically after up to four unsuccessful attempts to bill the customer.

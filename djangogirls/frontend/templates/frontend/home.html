@@ -1,0 +1,66 @@
+   
+{% load staticfiles %}
+{% include "frontend/header.html" %}
+{% load template_functions %}
+   <!--   log in   -->
+ {% for item in banner %}
+      <section class="indexPage">
+      	<div style='background:url({% static "media" %}/{{item.banner_image}}) no-repeat;' class="bannerPart ">
+      		<div class="container">
+      			<div class="row justify-content-center align-items-end home-row text-center  pb-85">
+      				<div class="col-lg-12">
+      					<img src='{% static "media" %}/{{item.banner_logo}}' class="bannerLogo">
+      					<h1 class="text-uppercase mt-5 mb-0">{{item.banner_title | safe}}</h1>
+      					<p class="mb-0 mt-2">{{item.banner_text | safe}}</p>
+      					<button type="button" class="btn btn-primary mt-5">Get involved with email</button>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      </section>
+{% endfor %}
+      <section class="howItWorks">
+      	<div class="container">
+      		<div class="row">
+      			<div class="col-lg-12">
+      				<h2 class="text-center mt-3">HOW IT WORKS</h2>
+      			</div>
+      		</div>
+      		<div class="row">
+                   {% for item in cms %}
+      			<div class="col-lg-4 col-md-4 px-lg-5 px-md-2 px-sm-0">
+      				<div class="three-column text-center">
+      					<div class="worksIcon"><img src='{% static "media" %}/{{item.banner_image}}'></div>
+      					<h3>{{item.title}}</h3>
+      				        {{item.short_description | safe}}
+      				</div>
+      			</div>
+                   {% endfor %}
+      		</div>
+      	</div>
+      </section>
+      {% for item in whyinter %}
+	  <section class="lowerBanner" style='background:url({% static "media" %}/{{item.banner_image}}) no-repeat;''>
+	  	<div class="overlayer">
+	  		<div class="container">
+	  			<div class="row justify-content-center align-items-lg-center align-items-md-center align-items-sm-center overlayBanner">
+	  				<div class="col-lg-12">
+	  			{{item.short_description | safe}}
+	  				</div>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </section>
+        {% endfor %}
+	  <section class="lowerImgPart">
+	  	<div class="container">
+	  		<div class="row">
+                  {% for item in bannerlowercms %}
+	  			<div class="col-lg-4 col-md-4">
+	  				<img src='{% static "media" %}/{{item.banner_image}}' class="img-fluid">
+	  			</div>
+                        {% endfor %}
+	  		</div>
+	  	</div>
+	  </section>
+	{% include "frontend/footer.html" %}

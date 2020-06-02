@@ -1,0 +1,27 @@
+{% load staticfiles %}
+{% load template_functions %}
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <p class="mb-0"><img src='{% static "common" %}/fontend/img/phoneIcon.png' class="mr-3">Contact Us</p>
+          </div>
+           {% get_logosocial as scial %}
+          <div class="col-lg-6 col-md-6">
+            <div>
+              <ul class="pl-0 socilIconList float-right">
+               {% for item in scial %}
+                <li class="mr-4"><a href="{{item.urls}}" target="_blank"><img src='{% static "media" %}/{{item.cover_pic}}'></a></li>
+               {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script  src='{% static "common/fontend/js/bootstrap.min.js" %}' ></script>
+  </body>
+</html>

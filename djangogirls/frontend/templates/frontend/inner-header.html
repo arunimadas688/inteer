@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  {% load template_functions %}
+  <title>Inteer</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href='{% static "common/fontend/css/bootstrap.min.css" %}'>
+  <!--  icon  css   -->
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <!--   custom   css    -->
+  <link rel="stylesheet" href='{% static "common/fontend/css/style.css" %}'/>
+  <style type="text/css">
+    .help-block{color:red};
+  </style>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+</head>
+<body>
+<!--   navigation   -->
+  <nav class="navbar navbar-expand-lg navbar-light" >
+    <a class="navbar-brand w-150" href="/"><img src='{% static "common" %}/fontend/img/logo.png' class="img-fluid" alt="logo"></a>
+    <button class="navbar-toggler navbar-toggler-right mt-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto align-items-center">
+        <li id="wrap" class="nav-search">
+          <form action="" autocomplete="on">
+            <input id="search" name="search" type="text" placeholder="What're we looking for ?">
+            <!--<span class="fa fa-search"></span>-->
+            <div class="seaech-submit">
+              <input id="search_submit" value="Search" type="submit">
+            </div>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa fa-th-list"></i>Feed</a>
+        </li>
+        {% if 'member_id' in request.session %}
+        <li class="nav-item">
+          <a class="nav-link inteer-link" href="#"><img src="img/logo-sign.png"> My Inteer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link inteer-link" href="/becomecoordinator/"><img src="img/logo-sign.png"> Become a Coordinator</a>
+        </li>
+        <li class="nav-item dropdown user-dropdown">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="user-drop-top d-flex align-items-center">
+              <div class="user-img">
+                <img src='{% static "common" %}/fontend/img/pic-1.png' alt="">
+              </div>
+              {% for usrdetails in user %}
+              <div class="user-name-area ml-3">
+                <span class="user-name text-white">{{usrdetails.first_name}} {{usrdetails.last_name}}</span>
+                <span>Lead Designer at RL Creative Studio</span>
+              </div>
+              {% endfor %}
+            </div>
+          </a>
+          <div class="dropdown-menu site-color">
+            <a class="dropdown-item" href="/dashboard/"><i class="fas fa-user-circle fa-1x"></i> Update Profile</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-th-list fa-1x"></i> Manage My Orgs</a>
+            <a class="dropdown-item" href="/logout/"><i class="fas fa-power-off fa-1x"></i> Sign Out</a>
+          </div>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login/"><i class="fa fa-th-key"></i>Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

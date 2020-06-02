@@ -1,0 +1,68 @@
+Here is the Inteer server details:
+username:root
+password:
+Inteer2@
+
+To enter into the server( 138.197.3.122 ) please go through below commands:
+
+sudo ssh root@138.197.3.122
+password
+cd /var/www/html/inteer
+source myvenv/bin/activate
+screen
+python manage.py runserver 0.0.0.0:8009 
+4000 0027 6000 3184
+then just close the terminal.
+
+Gitlab Details:
+username: maitrayee
+password: Maitaryee@123
+
+permission_classes = (IsAuthenticated,)
+def get(self,request):
+
+set@test.com
+stripe@test.com
+org@test.com
+test@delete.com
+
+https://github.com/stripe-samples/set-up-subscriptions/blob/master/server/python/README.md
+ALTER SEQUENCE public.adminpanel_payementinformations_id_seq RESTART WITH 1 
+https://github.com/davesque/django-rest-framework-simplejwt
+https://pypi.org/project/djangorestframework-simplejwt/1.2/
+https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
+https://www.agiliq.com/blog/2014/12/building-a-restful-api-with-django-rest-framework/
+
+https://github.com/CSSEGISandData/COVID-19/tree/master/archived_data/archived_daily_case_updates
+
+
+sudo snap install robo3t-snap
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+sudiptoganguly13@
+user name:cbnits
+password:Cbnits'Host#2020
+
+
+27929
+
+port:-27929
+
+ssl login:-  natitprod
+
+password:-  N@t!t@2019
+2224
+
+
+git clone https://sudipto92@bitbucket.org/sudipto92/natityoutaxipython.git
+
+
+http://111.93.169.90:8006/website/contactus/
+
+We will use a channel layer that uses Redis as its backing store. To start a Redis server on port 6379, run the following command:
+
+$ docker run -p 6379:6379 -d redis:5
+
+#maps
+https://dev.to/jessicabetts/how-to-use-google-maps-api-and-react-js-26c2
+
+https://codepen.io/maxrodkin/pen/WMyjXo?editors=0010

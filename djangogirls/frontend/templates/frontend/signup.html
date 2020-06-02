@@ -1,0 +1,139 @@
+{% load staticfiles %}
+{% include "frontend/inner-header.html" %}
+{% load template_functions %}
+ <link rel="stylesheet" href='{% static "common/fontend/css/bootstrapValidator.css" %}'>
+    <section class="login-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-12 text-center">
+                    <div class="logo-pic">
+                        <img src='{% static "common" %}/fontend/img/logo-color.png' alt="" class="img-fluid">
+                    </div>
+                    <p class="text-left font-weight-medium">Sign Up</p>
+                        <form class="form-area registerForm" id="form" method="post" action="/register-user/">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required="required">
+                            </div>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required="required">
+                            </div>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="location" id="location" placeholder="Location" required="required">
+                                <input type="hidden" id="cityLat" name="cityLat" />
+                                <input type="hidden" id="cityLng" name="cityLng" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phonenumber" id="phonenumber" placeholder="Phone Number" required="required">
+                            </div>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="emailaddress" id="emailaddress" placeholder="Email Address" required="required">
+                            </div> 
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="cpassword" id="cpassword" data-match="#password" data-match-error="Whoops, these don't match" placeholder="Confirm Password" required="required">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">Signup</button>
+                            </div>
+                            <div class="form-group log-bottom">
+                                <a href="/forgotpassword" class="d-block">Forgot password ?</a>
+                                <a href="/login" class="d-block">Already have a account?</a>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% include "frontend/inner-footer.html" %}
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyB2YO7UWCZmmtCBpF2mPDEJ-T08rxmyOOI" type="text/javascript"></script>
+<script src='{% static "common/fontend/js/bootstrapValidator.js" %}'></script>
+<script src='{% static "common/fontend/js/formValidation.js" %}'></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.registerForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+        fields: {
+            first_name: {
+                message: 'The firstname is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Firstname is required and cannot be empty'
+                    }
+                }
+            },
+            last_name: {
+                message: 'The lastname is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Lastname is required and cannot be empty'
+                    }
+                }
+            },
+            location: {
+                message: 'The location is not valid.',
+                validators: {
+                    notEmpty: {
+                        message: ' Location is required and cannot be empty'
+                    }
+                }
+            },
+             phonenumber: {
+                message: 'The phonenumber is not valid.',
+                validators: {
+                    notEmpty: {
+                        message: ' Phone Number is required and cannot be empty'
+                    }
+                }
+            },
+            emailaddress: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty.'
+                    },
+                    emailAddress: {
+                        message: ' This Email is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                message: 'The password is not valid.',
+                validators: {
+                    notEmpty: {
+                        message: ' Password is required and cannot be empty'
+                    }
+                }
+            },
+            cpassword: {
+                validators: {
+                  notEmpty: {
+                            message: 'Confirm Password is required and cannot be empty.'
+                        },
+                    identical: {
+                        field: 'password',
+                        message: ' Password and Confirm password are not the same'
+                    }
+                }
+            }
+        }
+    });
+});
+
+function initialize(){
+    var input = document.getElementById('location');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        document.getElementById('cityLat').value = place.geometry.location.lat();
+        document.getElementById('cityLng').value = place.geometry.location.lng();
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize); 
+</script>

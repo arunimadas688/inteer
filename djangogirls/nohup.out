@@ -1,0 +1,21 @@
+./start.sh: 1: ./start.sh: source: not found
+Unhandled exception in thread started by <function wrapper at 0x7f634ad1a9b0>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/django/utils/autoreload.py", line 229, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/django/core/management/commands/runserver.py", line 107, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/lib/python2.7/dist-packages/django/utils/autoreload.py", line 252, in raise_last_exception
+    six.reraise(*_exception)
+  File "/usr/lib/python2.7/dist-packages/django/utils/autoreload.py", line 229, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/django/__init__.py", line 18, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/lib/python2.7/dist-packages/django/apps/registry.py", line 85, in populate
+    app_config = AppConfig.create(entry)
+  File "/usr/lib/python2.7/dist-packages/django/apps/config.py", line 86, in create
+    module = import_module(entry)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named mptt
+Killed

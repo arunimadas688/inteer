@@ -1,0 +1,97 @@
+from . import views
+from django.conf.urls import include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
+from django.urls import path
+
+urlpatterns = [
+	url(r'^login/', views.admin_login, name='admin_login'),
+	url(r'^dashboard/', views.admin_dashboard, name='admin_dashboard'),
+	url(r'^adminmanagement/', views.admin_management, name='admin_management'),
+	url(r'^jsonsubadminmanagement/', views.jsonsubadminmanagement, name='jsonsubadminmanagement'),
+	url(r'^addsubadmin/', views.add_subadmin, name='add_subadmin'),
+    url(r'^edit-subadmin/(?P<subadminId>\d+)/', views.edit_subadmin, name='edit_subadmin'),
+    url(r'^update-subadmin/(?P<subadminId>\d+)/', views.edit_subadmin, name='update-subadmin'),
+    url(r'^delete-subadmin/(?P<subadminId>\d+)/', views.delete_subadmin, name='delete_subadmin'),
+    
+	url(r'^profile/', views.admin_profile, name='admin_profile'),
+	url(r'^edit-logo/', views.edit_logo, name='edit_logo'),
+	url(r'^banner-list/', views.banner_list, name='banner_list'),
+	url(r'^add-banner/', views.add_banner, name='add_banner'),
+	url(r'^submit-banner/', views.submit_banner, name='submit_banner'),
+	url(r'^edit-banner/(?P<bannerId>\d+)/', views.edit_banner, name='edit_banner'),
+	url(r'^submit-editbanner/', views.submit_editbanner, name='submit_editbanner'),
+	url(r'^cms-list/', views.cms_list, name='cms_list'),
+	url(r'^add-cms/', views.add_cms, name='add_cms'),
+	url(r'^submit-cms/', views.submit_cms, name='submit_cms'),
+	url(r'^edit-cms/(?P<cmsId>\d+)/', views.edit_cms, name='edit_cms'),
+	url(r'^submit-editcms/', views.submit_editcms, name='submit_editcms'),
+	url(r'^add-social/', views.add_social, name='add_social'),
+	url(r'^list-social/', views.list_social, name='list_social'),
+	url(r'^get_socials/', views.sociallist, name='sociallist'),
+	url(r'^socials_details/(?P<sid>\d+)/', views.socials_details, name='socials_details'),
+	url(r'^edit-social/', views.edit_social, name='edit_social'),
+	url(r'^delete-social/', views.delete_social, name='delete_social'),
+	url(r'^userdetails/(?P<uid>\d+)/', views.get_userdetails, name='get_userdetails'),
+	url(r'^blockusers/', views.block_users, name='block_users'),
+	url(r'^unblockusers/', views.unblock_users, name='unblock_users'),
+	url(r'^add-user/', views.add_users, name='add_users'),
+	url(r'^useredit/(?P<user_id>\d+)/', views.user_edit, name='user_edit'),
+	url(r'^edituser/', views.user_editdetails, name='user_editdetails'),
+	url(r'^logout/', views.admin_logout, name='admin_logout'),
+    
+    url(r'^add-how-it-works/', views.add_how_it_works, name='add_how_it_works'),
+    url(r'^how-it-works/', views.how_it_works_list, name='how_it_works_list'),
+    url(r'^all-how-it-works/', views.get_how_it_works_list, name='get_how_it_works_list'),
+    url(r'^edit-how-it-works/', views.edit_how_it_work, name='edit_how_it_work'),
+    url(r'^delete-howitwork/', views.delete_how_it_work, name='delete_how_it_work'),
+    url(r'^how-it-work-details/(?P<editId>\d+)/', views.how_it_work_details, name='how_it_work_details'),
+    url(r'^add-templates/', views.add_templates, name='add_templates'),
+    url(r'^email-templates/', views.email_templates, name='email_templates'),
+    url(r'^edit-emailtemplate/(?P<templateID>\d+)/', views.edit_emailtemplates, name='edit_emailtemplates'),
+    url(r'^edit-mailtemplate/', views.edit_mailtemplate, name='edit_mailtemplate'),
+    url(r'^add-seopages/', views.add_seopages, name='add_seopages'),
+    url(r'^seo-pages/', views.seo_pages, name='seo_pages'),
+    url(r'^edit-seopages/(?P<templateID>\d+)/', views.edit_seopages, name='edit_seopages'),
+    url(r'^edit-pages/', views.edit_pages, name='edit_pages'),
+    url(r'^contact-messages/', views.contact_messages, name='contact_messages'),
+    url(r'^all-contactmessages/', views.get_contact_messages, name='get_contact_messages'),
+    url(r'^reply-message/(?P<msgid>\d+)/', views.reply_message, name='reply_message'),
+    url(r'^send-contactmail/', views.send_contactmail, name='send_contactmail'),
+    url(r'^view-contactmessage/(?P<msgid>\d+)/', views.view_contactmessage, name='view_contactmessage'),
+    url(r'^add-organization/', views.add_organization, name='add_organization'),
+    url(r'^list-organization/', views.list_organization, name='list_organization'),
+    url(r'^get_orglist/', views.getorglistt, name='getorglistt'),
+    url(r'^organization-details/(?P<sid>\d+)/', views.organization_details, name='organization_details'),
+    url(r'^edit-organization/', views.organization_edit, name='organization_edit'),
+    url(r'^delete-organization/', views.delete_organization, name='delete_organization'),
+    
+    url(r'^pendingrequest/', views.pendingrequest, name='pendingrequest'),
+    url(r'^get_pendinglist/', views.getpendinglist, name='getpendinglist'),
+    url(r'^approvaldetails/(?P<uid>\d+)/', views.get_approvaldetails, name='get_approvaldetails'),
+    url(r'^approve-coordinator/', views.approve_coordinator, name='approve_coordinator'),
+    url(r'^listcoordinator/', views.listcoordinator, name='listcoordinator'),
+    url(r'^get_cordlist/', views.getcordlist, name='getcordlist'),
+    url(r'^listvolunteers/', views.listvolunteers, name='listvolunteers'),
+    url(r'^get_vollist/', views.getvollist, name='getvollist'),
+    url(r'^testfn/', views.testfn, name='testfn'),
+    url(r'^stripewebhook/', views.stripewebhook, name='stripewebhook'),
+    url(r'^usersubscription_list/', views.usersubscription_list, name='usersubscription_list'),
+	url(r'^json_subscription_list/', views.json_subscription_list, name='json_subscription_list'),
+    url(r'^edit_subscription/(?P<subscriptionId>\d+)/', views.edit_subscription, name='edit_subscription'),
+    # url(r'^update_subscription/(?P<subscriptionId>\d+)/', views.update_subscription, name='update_subscription'),
+	url(r'^upload_organization_opportunity/', views.upload_organization_opportunity, name='upload_organization_opportunity'),
+	url(r'^json_upload_organization/', views.json_upload_organization, name='json_upload_organization'),
+	url(r'^upload_all_csv/', views.upload_all_csv, name='upload_all_csv'),
+
+    # path('stripehome/', views.stripehome, name='stripehome'),
+    # path('product/<int:product_id>/<slug:product_slug>/',
+    #     views.show_product, name='product_detail'),
+    # path('charge/', views.charge, name='charge'), # new
+    # path('paymenthistory/', views.paymenthistory, name='paymenthistory'),
+    
+    
+    
+
+]

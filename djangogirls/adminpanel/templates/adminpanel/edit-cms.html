@@ -1,0 +1,65 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+    <h3 class="box-title">Edit CMS</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="post" action="/admin/submit-editcms/" enctype="multipart/form-data">
+      {% csrf_token %}
+        <input type="hidden" name="id" id="bannerID" value="{{ cms.id }}">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Title</label>
+          <input type="text" name="title" placeholder="Enter Title" value="{{ cms.title }}" id="exampleInputTitle" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Text</label>
+          <input type="text" name="text" placeholder="Enter Text" id="exampleInputTitle" value="{{ cms.text }}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputTitle">Enter Description</label>
+          <textarea name="short_description" id="summernote">{{ cms.short_description }}</textarea>
+        </div>
+
+
+        <div class="form-group">
+            <a class="fancyboxshow" href="/media/{{ cms.banner_image }}" height="200" width="380">  
+                <img src='/media/{{ cms.banner_image }}'>  
+            </a>
+        </div>
+        <div class="form-group">
+        <label for="exampleInputTitle">Upload Banner Image</label>
+          <input name="banner_image" type="file" accept="image/*" id="exampleInputFile">
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="col-md-3">
+        <button class="btn btn-primary btn-block btn-sm" type="submit">Edit CMS</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% include "adminpanel/footer-profile.html" %}
+<script>
+$(document).ready(function() {
+	$(".fancyboxshow").fancybox({
+		openEffect	: 'elastic',
+      closeEffect	: 'elastic',
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+  height: 300,                 // set editor height
+  minHeight: 300,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true                  // set focus to editable area after initializing summernote
+});
+});
+</script>

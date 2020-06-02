@@ -1,0 +1,221 @@
+
+/* 13-12-2017 custome css */
+.skin-blue .main-header .logo{
+  line-height: normal;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 70px;
+}
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a{
+  background: #3C8DBC none repeat scroll 0 0;
+  border-left-color: #3C8DBC;
+  color: #fff;
+}
+.skin-blue .sidebar-menu > li.header{
+  background: #3C8DBC none repeat scroll 0 0;
+    color: #fff;
+}
+.navbar-custom-menu .navbar-nav{
+  flex-direction: row;
+}
+.navbar-custom-menu .navbar-nav > li{
+  padding-right: 15px;
+}
+.navbar-custom-menu .dropdown-toggle::after{
+  content: none;
+}
+.new-dsbrd .back{
+  margin-left: 10px;
+}
+.new-dsbrd .todsbd{
+  color: #b8c7ce;
+  display: block;
+  font-size: 12px;
+}
+.logo-img-dasbord{
+  height: 30px;
+  margin-left: 15px;
+}
+.user-panel > .image > img{
+  border-radius: 50%;
+}
+.bg-right-gray{
+  background: #ECF0F5 !important;
+}
+.skin-blue .treeview-menu > li > a{
+  color: #fff;
+}
+.skin-blue .sidebar-menu > li > .treeview-menu{
+  background: #4eade4;
+  color: #fff;
+}
+.skin-blue .sidebar a{
+  color: #8d999f;
+}
+.sidebar-mini.sidebar-collapse .new-dsbrd span{
+  display: none;
+}
+.control-sidebar-tabs{
+  display: flex;
+}
+.control-sidebar-tabs li{
+  flex: 1;
+}
+.control-sidebar-tabs li a{
+  display: block;
+  text-align: center;
+}
+.navbar-custom-menu .dropdown-menu{
+  border-radius: 0 !important;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  flex-direction: row;
+  z-index: 999;
+}
+.ctySmrt-app-menu .panel{
+  color: #53585f;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0;
+  border-radius: 0;
+  border-color: #e3e8ed;
+  border-radius: 0;
+  border: 1px solid #e3e8ed;
+}
+.ctySmrt-app-menu .panel-heading{
+  background: #f7f8f9;
+  border-bottom: 1px solid #e3e8ed;
+  border-radius: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.ctySmrt-app-menu .list-group-item{
+  display: flex;
+  border-radius: 0;
+  background: #E1E5E9;
+  color: #2A6496;
+  border: none;
+}
+.ctySmrt-app-menu .list-group .name{
+  flex: 1
+}
+.nmc{
+  border-radius: 0;
+  border-color: #e3e8ed !important;
+  background: #f7f8f9 !important;
+}
+.main-move-lst, .sub-move-lst{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.main-move-lst .main-li{
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.main-move-lst .main-li:first-child{
+  border-top: 1px solid #ddd;
+}
+.main-move-lst .main-li h4{
+  display: flex;
+  color: #3C8DBC;
+  font-size: 20px;
+}
+.main-move-lst .main-li h4 .name{
+  flex: 1;
+  margin-left: 10px;
+}
+.main-move-lst .main-li .move-icon{
+  color: #000;
+}
+.sub-move-lst .sub-move-lst-li{
+  display: flex;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.sub-move-lst .sub-move-lst-li:first-child{
+  border-top: 1px solid #ddd;
+}
+.sub-move-lst .sub-move-lst-li .name{
+  flex: 1;
+}
+.sub-move-lst .sub-move-lst-li .icn{
+  color: #E1E5E9;
+  margin-right: 5px;
+}
+.sub-move-lst .sub-move-lst-li .btn-defult{
+  border-radius: 0;
+  font-size: 13px;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > img{
+  border-radius: 50%;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p{
+  margin-bottom: 0;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header{
+  height: auto;
+}
+.event-lst{
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+.event-lst li{
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.event-lst li:hover{
+  box-shadow: 6px 6px 19px -1px #e0e0e0;
+}
+.event-lst li a{
+  align-items: center;
+  color: #3c8dbc;
+}
+.event-lst .img{
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
+.event-lst .name{
+  margin-left: 15px;
+}
+.event-lst .name h3{
+  font-size: 16px;
+}
+.event-lst .name .time{
+  width: 100px;
+}
+.font-12{
+  font-size: 12px;
+}
+.text-gray{
+  color: #b8c7ce;
+}
+.event-lst .small-gray{
+  color: #b8c7ce;
+font-size: 12px;
+}
+.my-table .table{
+  border: none;
+}
+.my-table .table tr td{
+  border: none;
+}
+.my-table .table-hover tbody tr{
+  background: #fff;
+  height: 80px;
+}
+.my-table .table-hover tbody tr:hover{
+  box-shadow: 6px 6px 19px -1px #e0e0e0;
+  background: none;
+}
+.my-table .fixed-table-container{
+  border: none;
+}
+.my-table .bootstrap-table .table thead > tr > th{
+  border: none;
+}

@@ -1,0 +1,89 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-12">
+    {% if messages %}
+        <ul class="messages list-unstyled" style="margin-top: 40px;">
+            {% for message in messages %}
+                <li>
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+    <div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Admin Management</h3>
+        <!-- <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div> -->
+        <div class="pull-right search"><a href="{% url 'add_subadmin' %}" class="btn btn-high btn-success">Add</a></div>
+    </div>
+    <!-- /.box-header -->
+    <div>
+        {% if UserProfileCollections == 1 %}
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Sub Admin Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+            </table>
+        {% else %}
+         No record!
+        {% endif %}
+                
+    </div>
+    <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>
+    <!-- /.col -->
+  
+{% include "adminpanel/footer-profile.html" %}
+<script>
+function anchorFormatter(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/organization-details/'+value+'/">Actions</a>';
+    }
+function servicegallery(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary" href="/admin/service-gallery/'+value+'/">Gallery</a>';
+    }
+function confirmationmsg(obj){
+    console.log(window.location)
+    if(confirm('Are you sure?')){
+        window.location.href = window.location.origin + $(obj).attr('data-url') ;
+    }
+}
+$(document).ready(function() {
+    // $('#example').dataTable({  
+    //     "aoColumnDefs": [
+    //         { 'bSortable': false, 'aTargets': [4] }
+    //     ],
+    //     'responsive': true,
+    //      "order": [[ 0, "desc" ]]
+    //     // 'bLengthChange':dataTableShowsEntries(this),
+    //     // 'paging': dataTableShowsEntries(this),
+	// 	});
+if($('#example').length>0){
+    $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [4] }
+        ],
+        'responsive': true,
+        "order": [[ 0, "desc" ]],     
+        "ajax": {
+            url: '/admin/jsonsubadminmanagement', // json datasource
+            data: {action: 'jsonsubadminmanagement'},
+            // data: {action: '{{admin_management}}'},
+            // type: 'post',  // method  , by default get
+        },
+    });
+}
+});
+</script>

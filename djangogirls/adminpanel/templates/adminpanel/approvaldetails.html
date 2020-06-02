@@ -1,0 +1,197 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+
+        <div class="col-md-3">
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+               
+              <h3 class="profile-username text-center">{{ current_user.first_name }}&nbsp;{{ current_user.last_name }}</h3>
+
+              <p class="text-muted text-center">Normal user</p>
+
+            <!--  <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Followers</b> <a class="pull-right">1,322</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Following</b> <a class="pull-right">543</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Friends</b> <a class="pull-right">13,287</a>
+                </li>
+              </ul>   -->
+
+            <!--  <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+        <!--  <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+        <!--   {% for educationdetail in educationdetails %}  
+            <div class="box-body">
+            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+            <p class="text-muted">{{ educationdetail.degree }} in {{ educationdetail.field_study }} from {{ educationdetail.dates_join }} to {{  educationdetail.dates_complete }} at {{ educationdetail.school }}</p>
+            <hr>
+            <strong><i class="fa fa-info-circle margin-r-5"></i> Grade</strong>
+            <p class="text-muted">{{ educationdetail.grade }}</p>
+            <hr>
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+            <p>{{ educationdetail.description }}</p>
+            <hr>
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> Activity Society</strong>
+            <p>{{ educationdetail.activity_society }}</p>
+            </div>
+           {% endfor %}
+            <!-- /.box-body -->
+        <!--  </div>  -->
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#details" data-toggle="tab">Details</a></li>  
+            <!--  <li><a href="#goals" data-toggle="tab">Goals</a></li>
+              <li><a href="#tasks" data-toggle="tab">Tasks</a></li>
+              <li><a href="#friends" data-toggle="tab">Friends</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div class="active tab-pane" id="details">
+                    <!-- block users message -->
+                    <div id="blockfail_message" style="display: none;" class="alert alert-danger">
+                        <strong>Sorry!</strong> {{ current_user.first_name }}&nbsp;{{ current_user.last_name }} cannot be blocked
+                    </div>
+                    <div id="blocksuccess_message" style="display: none;" class="alert alert-success">
+                        <strong> {{ current_user.first_name }}&nbsp;{{ current_user.last_name }} is Blocked</strong> 
+                    </div>
+                    
+                    <!-- unblock users message -->
+                    <div id="unblockfail_message" style="display: none;" class="alert alert-danger">
+                        <strong>Sorry!</strong> {{ current_user.first_name }}&nbsp;{{ current_user.last_name }} cannot be active
+                    </div>
+                    <div id="unblocksuccess_message" style="display: none;" class="alert alert-success">
+                        <strong> {{ current_user.first_name }}&nbsp;{{ current_user.last_name }} is active Now</strong> 
+                    </div>
+                    
+                    <h2> {{ current_user.first_name }}&nbsp;{{ current_user.last_name }}</h2>
+                    <br/>
+                    <label>
+                        <span>joined at :</span><span>&nbsp;{{ current_user.date_joined }}</span>
+                    </label>
+                    <hr>
+                    
+                    <strong><i class="fa fa-user margin-r-5"></i> Username</strong>
+                    
+                    <form role="form" id="frm_addservice" method="post" action="/admin/approve-coordinator/" enctype="multipart/form-data">{% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{current_user.id}}">
+                        <input type="hidden" name="organization_id" value="{{current_org.id}}">
+                        <p class="text-muted">{{ current_user.username }}
+                        <span class="pull-right">
+                            <button id="block_user" name="approvebutton" class="btn btn-danger" type="submit">Approve</button>
+                        </span>
+                    </p>
+                    </form>
+                    
+                    
+                    <!-- Modal -->
+                    <div id="blockuserModal" class="modal fade" role="dialog" >
+                      <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Block {{ current_user.first_name }}&nbsp;{{ current_user.last_name }}</h4>
+                          </div>
+                          <div class="modal-body">
+                               <form role="form">
+                                    <div class="form-group">
+                                      <p>Reason : </p>
+                                      <textarea name="block_reason" id="id_blockreason" style="width: 557px; height: 89px;"></textarea>
+                                    </div>
+                                   <button type="submit" id="btnid_blockuser" class="btn btn-primary">Submit</button>
+                               </form>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    
+                    <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
+                     <p class="text-muted">{{ current_user.email }}</p>
+                     
+                     <strong><i class="fa fa-envelope margin-r-5"></i>User Phone</strong>
+                     <p class="text-muted">{{ user_profile.phone_number }}</p>
+                     
+                     <strong><i class="fa fa-envelope margin-r-5"></i>User Address</strong>
+                     <p class="text-muted">{{ user_profile.address }}</p>
+                     
+                     <strong><i class="fa fa-arrow-right margin-r-5"></i> Organization Name</strong>
+                     <p class="text-muted">{{ current_org.organization_name }}</p>
+                     
+                     <strong><i class="fa fa-arrow-right margin-r-5"></i> Organization Email</strong>
+                     <p class="text-muted">{{ current_org.email }}</p>
+                     
+                     <strong><i class="fa fa-arrow-right margin-r-5"></i> Organization Phone</strong>
+                     <p class="text-muted">{{ current_org.phone }}</p>
+                     
+                    
+                     
+                </div>
+               <!-- <div class="tab-pane" id="goals"></div>
+                <div class="tab-pane" id="tasks"> </div>
+                <div class="tab-pane" id="friends"></div> -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+     
+  
+{% include "adminpanel/footer-profile.html" %}  
+
+<script>
+   //callback handler for form submit
+$("#frm_addservice").submit(function(e)
+{
+    var formURL = $(this).attr("action");
+    $.ajax(
+    {
+        url : formURL,
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        beforeSend: function() {
+                    //$('.response').show();
+                },
+        success:function(data, textStatus, jqXHR) 
+        {
+            if(data === '1') {
+              $('.response-slug').hide();
+              $('.response').show();
+              setTimeout(function(){ location.assign("/admin/pendingrequest/"); }, 3000);
+            }else{
+              $('.response-slug').show();
+              $('.response').hide(); 
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            return false;      
+        }
+    });
+    e.preventDefault(); //STOP default action
+    //e.unbind(); //unbind. to stop multiple form submit.
+});
+    
+</script>

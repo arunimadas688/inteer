@@ -1,0 +1,59 @@
+{% load staticfiles %}
+{% include "frontend/inner-header.html" %}
+{% load template_functions %}
+<section class="login-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-12 text-center">
+                    <div class="logo-pic">
+                        <img src='{% static "common" %}/fontend/img/logo-color.png' alt="" class="img-fluid">
+                    </div>
+                        <p class="text-left font-weight-medium">Become a Coordinator</p>
+                           {% if req_status.status == 'notexist' %}
+                            {% else %}
+                                Your current Application Status:{{req_status.status}}
+                            {% endif %}
+                        <form class="form-area" action="/become-coordinator/" method="POST">
+                            <div class="form-group">
+                                <select name="org_id_id" id="org_id_id" class="form-control">
+                                    <option value="">- Select Organization -</option>
+                                    {% for org in organization %}
+                                       {% if org.id == req_status.org_id %} 
+                                        <option value="{{org.id}}" selected>{{org.organization_name}}</option>
+                                        {% else %}
+                                        <option value="{{org.id}}">{{org.organization_name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                           <div class="form-group">
+                               <input type="text" name="org_address" id="org_address" value="{{req_status.org_address}}" placeholder="Choose Your Address" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                               <input type="text" name="employee_id" value="{{req_status.org_employee_number}}" placeholder="Type Employee ID" class="form-control">
+                            </div>
+                            {% if req_status.status == 'Pending' %}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+                                </div>
+                            {% endif %}
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% include "frontend/inner-footer.html" %}
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyB2YO7UWCZmmtCBpF2mPDEJ-T08rxmyOOI" type="text/javascript"></script>
+<script>
+function initialize(){
+    var input = document.getElementById('org_address');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        document.getElementById('cityLat').value = place.geometry.location.lat();
+        document.getElementById('cityLng').value = place.geometry.location.lng();
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize); 
+</script>

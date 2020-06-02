@@ -1,0 +1,101 @@
+{% load staticfiles %}
+{% include "adminpanel/header-profile.html" %}
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+        <h3 class="box-title">Add Sub Admin</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        {% if messages %}
+            <ul class="messages list-unstyled" style="margin-top: 40px;">
+                {% for message in messages %}
+                    <li>
+                        <div class="alert alert-error" role="alert">
+                            {{ message }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %} 
+        <form role="form" method="post" action="{% url 'add_subadmin' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="subadmin-firstname">First Name</label>
+                    <input type="text" name="firstname" placeholder="First Name" id="subadmin-firstname" class="form-control" value="{{firstname}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-lastname">Last Name</label>
+                    <input type="text" name="lastname" placeholder="Last Name" id="subadmin-lastname" class="form-control" value="{{lastname}}" required>
+                </div>    
+                <div class="form-group">
+                    <label for="subadmin-username">Username</label>
+                    <input type="text" name="username" placeholder="User name" id="subadmin-username" class="form-control" value="{{username}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-pwd">Password</label>
+                    <input type="text" name="pwd" placeholder="Password" id="subadmin-pwd" class="form-control" value="{{password}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-email">Email</label>
+                    <input type="email" name="email" placeholder="Email" id="subadmin-email" value="{{email}}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-address">Address</label>
+                    <input type="text" name="address" placeholder="Address" id="subadmin-address" class="form-control" value="{{address}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-phone_number">Phone Number</label>
+                    <input type="number" name="phone_number" placeholder="phone number" id="subadmin-phone_number" value="{{phone_number}}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-profile_image">Profile Image</label>
+                    <input name="profile_image" type="file" accept="image/*" id="profile_image" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="subadmin-latitude">Latitude</label>
+                    <input type="text" name="latitude" placeholder="latitude" id="subadmin-latitude" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-longitude">Longitude</label>
+                    <input type="text" name="longitude" placeholder="longitude" id="subadmin-longitude" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-about_me">About Me</label>
+                    <textarea name="about_me" placeholder="Enter Text" id="subadmin-about_me" class="form-control" id="summernote"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-physical-ability">Physical Ability</label>
+                    <input type="text" name="physical_ability" placeholder="physical-ability" id="subadmin-physical-ability" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="subadmin-is-verified">is verified</label>
+                    <input type="radio" name="is_verified"  value="verified"> Verified <br/>
+                    <input type="radio" name="is_verified"  value="notverified"> Not verified
+                </div>
+            </div>
+            <fieldset>
+                <legend>Menu Allow</legend>
+                <input type="checkbox" name="menu" value="usersection">User section<br>
+                <input type="checkbox" name="menu" value="organizations">Organizations<br>
+            </fieldset>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Add Sub Admin</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% include "adminpanel/footer-profile.html" %}
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+  height: 300,                 // set editor height
+  minHeight: 300,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true                  // set focus to editable area after initializing summernote
+});
+});
+</script>

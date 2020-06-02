@@ -1,0 +1,88 @@
+{% load staticfiles %}
+{% load admin_fun %}
+{% include "adminpanel/header-profile.html" %}  
+<div class="col-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">How It Works</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="usertable"
+               data-toggle="table"
+               data-url="/admin/all-how-it-works/"
+               data-height="900"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-field="title" data-sortable="true">Title</th>
+<!--                <th data-field="pic" data-formatter="imageFormatter">pic</th>-->
+                <th data-field="created_date" data-sortable="true">Created Date</th>
+                <th data-field="editid" data-formatter="editFormatter">Edit</th>
+                <th data-field="deleteid" data-formatter="deleteFormatter">Delete</th>
+            </tr>
+            </thead>
+        </table>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+{% include "adminpanel/footer-profile.html" %}
+<script>
+function imageFormatter(value, row) {
+      if (value) {
+        return '<img style="border-radius : 50px; height : 50px; width : 50px;" src="/admin/media/'+value+'" />';
+       }
+       else {
+         return '<img style="border-radius : 50px; height : 50px; width : 50px;" src="{% static "common/images/no-img.jpg" %}" />';  
+       }
+    }
+
+function editFormatter(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary editbanner" href="/admin/how-it-work-details/'+value+'">Edit</button>';
+    }
+function deleteFormatter(value, row) {
+      return '<a class="btn btn-block btn-sm btn-primary deletebanner" onclick="return ConfirmDelete('+value+');" data-id="'+value+'">Delete</a>';
+    }  
+    
+
+
+function ConfirmDelete(del_id)
+{
+  var x = confirm("Are you sure you want to delete?");
+  if (x) {
+      //alert(del_id);
+      $.ajax({
+                        url : '/admin/delete-howitwork/',
+                        type: "POST",
+                        data : { del_id : del_id },
+                        headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                        success:function(data, textStatus, jqXHR) 
+                        {
+                            if(data === "1") {
+                               location.reload();  
+                            }else { 
+                              console.log(data);
+                            } 
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) 
+                        {
+                            return false;      
+                        }
+                    });
+      return true; 
+     }
+  else
+    return false;
+}
+</script>
